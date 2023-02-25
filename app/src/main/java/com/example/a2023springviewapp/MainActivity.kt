@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         val editText = findViewById<EditText>(R.id.memo_edit_text)
         val addButton = findViewById<Button>(R.id.add_button)
 
-        val realm = Realm.getDefaultInstance()
+        val realm = Realm .getDefaultInstance()
 
         addButton.setOnClickListener {
             val text = editText.text.toString()
