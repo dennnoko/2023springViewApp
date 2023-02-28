@@ -59,13 +59,13 @@ class MainActivity : AppCompatActivity() {
             recyclerView.post {
                 adapter.updateMemoList(memoList)
             }
-            //初回表示時にリストを表示
-            realm.executeTransactionAsync {
-                val memoList = it.where(Memo::class.java).findAll().map { it.name }
-                //UIスレッドで更新する
-                recyclerView.post {
-                    adapter.updateMemoList(memoList)
-                }
+        }
+        //初回表示時にリストを表示
+        realm.executeTransactionAsync {
+            val memoList = it.where(Memo::class.java).findAll().map { it.name }
+            //UIスレッドで更新する
+            recyclerView.post {
+                adapter.updateMemoList(memoList)
             }
         }
     }
