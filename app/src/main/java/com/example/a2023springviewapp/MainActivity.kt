@@ -1,16 +1,19 @@
 package com.example.a2023springviewapp
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.recyclerview.widget.RecyclerView
 import io.realm.Realm
+import io.realm.kotlin.delete
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var adapter: MemoListAdapter
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         val editText = findViewById<EditText>(R.id.memo_edit_text)
         val addButton = findViewById<Button>(R.id.add_button)
+        val deleteButton = findViewById<Button>(R.id.delete_button)
 
         val realm = Realm .getDefaultInstance()
 
@@ -40,6 +44,13 @@ class MainActivity : AppCompatActivity() {
             //テキストを空にする
             editText.text.clear()
         }
+
+        deleteButton.setOnClickListener {
+            realm.executeTransactionAsync {
+                it.deleteAll()
+            }
+        }
+
         //DBに変更があった時に通知が来る
         realm.addChangeListener {
             //変更があった時にリストをアップデートする

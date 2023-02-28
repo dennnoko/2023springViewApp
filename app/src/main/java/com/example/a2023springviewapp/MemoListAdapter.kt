@@ -6,7 +6,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MemoListAdapter: RecyclerView.Adapter<MemoListAdapter.MemoViewHolder>() {
+class
+MemoListAdapter: RecyclerView.Adapter<MemoListAdapter.MemoViewHolder>() {
     private val memoList = mutableListOf<String>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MemoViewHolder {
@@ -25,6 +26,13 @@ class MemoListAdapter: RecyclerView.Adapter<MemoListAdapter.MemoViewHolder>() {
         this.memoList.clear()
         this.memoList.addAll(memoList)
         //データに変更があったことをadapterに通知
+        notifyDataSetChanged()
+    }
+
+    fun deleteMemoList(memoList: List<String>) {
+        //データをクリア
+        this.memoList.clear()
+        //変更を通知
         notifyDataSetChanged()
     }
 
